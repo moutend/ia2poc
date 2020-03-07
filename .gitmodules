@@ -1,0 +1,6 @@
+[submodule "lib/ia2"]
+	path = lib/ia2
+	url = https://github.com/moutend/ia2
+[submodule "lib/cpplogger"]
+	path = lib/cpplogger
+	url = https://github.com/moutend/cpplogger
