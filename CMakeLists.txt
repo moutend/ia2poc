@@ -23,4 +23,4 @@ add_compile_options("/ZW")
 
 file(GLOB SOURCES "./src/*")
 add_library(ia2poc SHARED ${SOURCES})
-target_link_libraries(ia2poc cpplogger cpprestsdk::cpprest cpprestsdk::cpprestsdk_zlib_internal cpprestsdk::cpprestsdk_boost_internal cpprestsdk::cpprestsdk_brotli_internal Oleacc.lib)
+target_link_libraries(ia2poc cpplogger ia2 cpprestsdk::cpprest cpprestsdk::cpprestsdk_zlib_internal cpprestsdk::cpprestsdk_boost_internal cpprestsdk::cpprestsdk_brotli_internal Oleacc.lib)
