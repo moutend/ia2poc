@@ -1,4 +1,5 @@
 #include <cpplogger/cpplogger.h>
+#include <ia2/ia2.h>
 #include <windows.h>
 
 #include <Commctrl.h>
@@ -27,7 +28,8 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
   }
 
   IAccessible *pAcc{nullptr};
-  VARIANT vChild{};
+  IAccessible2 *pAcc2{nullptr};
+  IServiceProvider *pServe{nullptr} VARIANT vChild{};
 
   HRESULT hr{};
 
@@ -42,6 +44,23 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
 
   Log->Info(L"IAccessible event received", GetCurrentThreadId(), __LONGFILE__);
 
+  if (pAcc->QueryInterface(IID_IServiceProvider,
+                           reinterpret_cast<void **>(&pServe)) != S_OK) {
+    Log->Info(L"Failed to query IServiceProvider", GetCurrentThreadId(),
+              __LONGFILE__);
+    goto CLEANUP;
+  }
+
+  if (FAILED(pServe->QueryService(IID_IAccessible, IID_IAccessible2, reinterpret_cast<void **>(&pAcc2))) {
+    Log->Info(L"Failed to query IAccessible2", GetCurrentThreadId(),
+              __LONGFILE__);
+  } else {
+    Log->Info(L"Success to query IAccessible2", GetCurrentThreadId(),
+              __LONGFILE__);
+  }
+
+  goto CLEANUP;
+
   RawEvent *pRawEvent{};
   RawProcessInfo *pRawProcessInfo{};
 
@@ -55,6 +74,10 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
     return;
   }
 
+  CLEANUP:
+
+  SafeRelease(&pAcc2);
+  SafeRelease(&pServe);
   SafeRelease(&pAcc);
   SafeDelete(&pRawEvent);
   SafeDelete(&pRawProcessInfo);
