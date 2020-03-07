@@ -29,7 +29,8 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
 
   IAccessible *pAcc{nullptr};
   IAccessible2 *pAcc2{nullptr};
-  IServiceProvider *pServe{nullptr} VARIANT vChild{};
+  IServiceProvider *pServe{nullptr};
+  VARIANT vChild{};
 
   HRESULT hr{};
 
