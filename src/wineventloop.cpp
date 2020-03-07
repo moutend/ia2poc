@@ -52,7 +52,7 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
     goto CLEANUP;
   }
 
-  if (FAILED(pServe->QueryService(IID_IAccessible, IID_IAccessible2, reinterpret_cast<void **>(&pAcc2))) {
+  if (FAILED(pServe->QueryService(IID_IAccessible, IID_IAccessible2, reinterpret_cast<void **>(&pAcc2)))) {
     Log->Info(L"Failed to query IAccessible2", GetCurrentThreadId(),
               __LONGFILE__);
   } else {
