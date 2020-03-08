@@ -45,7 +45,6 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
   }
 
   Log->Info(L"IAccessible event received", GetCurrentThreadId(), __LONGFILE__);
-  goto CLEANUP;
 
   hr = pAcc->QueryInterface(IID_IServiceProvider,
                             reinterpret_cast<void **>(&pServe));
