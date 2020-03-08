@@ -111,6 +111,7 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
   Log->Info(L"Create windows event loop thread", GetCurrentThreadId(),
             __LONGFILE__);
 
+/*@@@begin winLoop
   winEventLoopThread =
       CreateThread(nullptr, 0, winEventLoop,
                    static_cast<void *>(winEventLoopCtx), 0, nullptr);
@@ -120,6 +121,7 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     *code = -1;
     return;
   }
+@@@end winLoop*/
 
   Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
