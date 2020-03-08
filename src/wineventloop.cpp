@@ -27,12 +27,11 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
     objectId = OBJID_CLIENT;
   }
 
+  HRESULT hr{};
   IAccessible *pAcc{nullptr};
   IAccessible2 *pAcc2{nullptr};
   IServiceProvider *pServe{nullptr};
   VARIANT vChild{};
-
-  HRESULT hr{};
 
   hr = AccessibleObjectFromEvent(hWindow, objectId, childId, &pAcc, &vChild);
 
@@ -46,15 +45,19 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
   Log->Info(L"IAccessible event received", GetCurrentThreadId(), __LONGFILE__);
   goto CLEANUP;
 
-  if (pAcc->QueryInterface(IID_IServiceProvider,
-                           reinterpret_cast<void **>(&pServe)) != S_OK) {
+  hr = pAcc->QueryInterface(IID_IServiceProvider,
+                            reinterpret_cast<void **>(&pServe));
+
+  if (FAILED(hr)) {
     Log->Info(L"Failed to query IServiceProvider", GetCurrentThreadId(),
               __LONGFILE__);
     goto CLEANUP;
   }
 
-  if (FAILED(pServe->QueryService(IID_IAccessible, IID_IAccessible2,
-                                  reinterpret_cast<void **>(&pAcc2)))) {
+  hr = pServe->QueryService(IID_IAccessible, IID_IAccessible2,
+                            reinterpret_cast<void **>(&pAcc2));
+
+  if (FAILED(hr)) {
     Log->Info(L"Failed to query IAccessible2", GetCurrentThreadId(),
               __LONGFILE__);
   } else {
