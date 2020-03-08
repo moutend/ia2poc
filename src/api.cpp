@@ -80,16 +80,18 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  Log->Info(L"Create uia loop thread", GetCurrentThreadId(), __LONGFILE__);
+  /*@@@begin uiaLoop
+    Log->Info(L"Create uia loop thread", GetCurrentThreadId(), __LONGFILE__);
 
-  uiaLoopThread = CreateThread(nullptr, 0, uiaLoop,
-                               static_cast<void *>(uiaLoopCtx), 0, nullptr);
+    uiaLoopThread = CreateThread(nullptr, 0, uiaLoop,
+                                 static_cast<void *>(uiaLoopCtx), 0, nullptr);
 
-  if (uiaLoopThread == nullptr) {
-    Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
-    *code = -1;
-    return;
-  }
+    if (uiaLoopThread == nullptr) {
+      Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
+      *code = -1;
+      return;
+    }
+  @@@end uiaLoop*/
 
   Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
