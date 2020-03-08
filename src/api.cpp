@@ -80,20 +80,16 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  /*@@@begin uiaLoop
-    Log->Info(L"Create uia loop thread", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Create uia loop thread", GetCurrentThreadId(), __LONGFILE__);
 
-    uiaLoopThread = CreateThread(nullptr, 0, uiaLoop,
-                                 static_cast<void *>(uiaLoopCtx), 0, nullptr);
+  uiaLoopThread = CreateThread(nullptr, 0, uiaLoop,
+                               static_cast<void *>(uiaLoopCtx), 0, nullptr);
 
-    if (uiaLoopThread == nullptr) {
-      Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
-      *code = -1;
-      return;
-    }
-  @@@end uiaLoop*/
-
-  Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
+  if (uiaLoopThread == nullptr) {
+    Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
+    *code = -1;
+    return;
+  }
 
   winEventLoopCtx = new WinEventLoopContext();
 
@@ -111,17 +107,17 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
   Log->Info(L"Create windows event loop thread", GetCurrentThreadId(),
             __LONGFILE__);
 
-/*@@@begin winLoop
-  winEventLoopThread =
-      CreateThread(nullptr, 0, winEventLoop,
-                   static_cast<void *>(winEventLoopCtx), 0, nullptr);
+  /*@@@begin winLoop
+    winEventLoopThread =
+        CreateThread(nullptr, 0, winEventLoop,
+                     static_cast<void *>(winEventLoopCtx), 0, nullptr);
 
-  if (winEventLoopThread == nullptr) {
-    Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
-    *code = -1;
-    return;
-  }
-@@@end winLoop*/
+    if (winEventLoopThread == nullptr) {
+      Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
+      *code = -1;
+      return;
+    }
+  @@@end winLoop*/
 
   Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
