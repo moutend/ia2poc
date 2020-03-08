@@ -41,9 +41,9 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  Log = new Logger::Logger(L"CoreNode", L"v0.1.0-develop", 4096);
+  Log = new Logger::Logger(L"ia2poc", L"v0.1.0-develop", 4096);
 
-  Log->Info(L"Setup CoreNode", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
   logLoopCtx = new LogLoopContext();
 
@@ -91,7 +91,7 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  Log->Info(L"Complete setup CoreNode", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
   winEventLoopCtx = new WinEventLoopContext();
 
@@ -119,7 +119,7 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  Log->Info(L"Complete setup CoreNode", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
   isActive = true;
 }
@@ -135,7 +135,7 @@ void __stdcall Teardown(int32_t *code) {
     return;
   }
 
-  Log->Info(L"Teardown CoreNode", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Teardown ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
   if (uiaLoopThread == nullptr) {
     goto END_UIALOOP_CLEANUP;
@@ -182,7 +182,7 @@ END_UIALOOP_CLEANUP:
 
 END_WINEVENTLOOP_CLEANUP:
 
-  Log->Info(L"Complete teardown CoreNode", GetCurrentThreadId(), __LONGFILE__);
+  Log->Info(L"Complete teardown ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
   if (logLoopThread == nullptr) {
     goto END_LOGLOOP_CLEANUP;
