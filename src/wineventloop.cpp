@@ -32,6 +32,8 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
   IAccessible2 *pAcc2{nullptr};
   IServiceProvider *pServe{nullptr};
   VARIANT vChild{};
+  RawEvent *pRawEvent{};
+  RawProcessInfo *pRawProcessInfo{};
 
   hr = AccessibleObjectFromEvent(hWindow, objectId, childId, &pAcc, &vChild);
 
@@ -66,9 +68,6 @@ void eventCallback(HWINEVENTHOOK hHook, DWORD eventId, HWND hWindow,
   }
 
   goto CLEANUP;
-
-  RawEvent *pRawEvent{};
-  RawProcessInfo *pRawProcessInfo{};
 
   if (FAILED(RawEventFromIAccessible(eventId, pAcc, &pRawEvent))) {
     return;
