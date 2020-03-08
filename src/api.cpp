@@ -67,7 +67,6 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
     return;
   }
 
-  Sleep(10500);
   uiaLoopCtx = new UIALoopContext();
 
   uiaLoopCtx->HandleFunc = eventHandler;
