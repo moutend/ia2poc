@@ -107,17 +107,15 @@ void __stdcall Setup(int32_t *code, int32_t logLevel,
   Log->Info(L"Create windows event loop thread", GetCurrentThreadId(),
             __LONGFILE__);
 
-  /*@@@begin winLoop
-    winEventLoopThread =
-        CreateThread(nullptr, 0, winEventLoop,
-                     static_cast<void *>(winEventLoopCtx), 0, nullptr);
+  winEventLoopThread =
+      CreateThread(nullptr, 0, winEventLoop,
+                   static_cast<void *>(winEventLoopCtx), 0, nullptr);
 
-    if (winEventLoopThread == nullptr) {
-      Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
-      *code = -1;
-      return;
-    }
-  @@@end winLoop*/
+  if (winEventLoopThread == nullptr) {
+    Log->Fail(L"Failed to create thread", GetCurrentThreadId(), __LONGFILE__);
+    *code = -1;
+    return;
+  }
 
   Log->Info(L"Complete setup ia2poc", GetCurrentThreadId(), __LONGFILE__);
 
